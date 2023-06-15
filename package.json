@@ -10,14 +10,20 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.18.2",
+    "@react-native-community/geolocation": "^3.0.6",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
     "axios": "^1.4.0",
+    "date-fns": "^2.30.0",
     "react": "18.2.0",
     "react-native": "0.71.10",
     "react-native-gesture-handler": "^2.12.0",
+    "react-native-permissions": "^3.8.0",
     "react-native-safe-area-context": "^4.5.3",
     "react-native-screens": "^3.21.0",
+    "react-native-svg": "^13.9.0",
+    "react-native-vector-icons": "^9.2.0",
     "reactotron-react-native": "^5.0.3",
     "styled-components": "^6.0.0-rc.3"
   },
@@ -30,6 +36,7 @@
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^29.2.1",
     "@types/react": "^18.0.24",
+    "@types/react-native-vector-icons": "^6.4.13",
     "@types/react-test-renderer": "^18.0.0",
     "@types/styled-components": "^5.1.26",
     "@types/styled-components-react-native": "^5.2.1",

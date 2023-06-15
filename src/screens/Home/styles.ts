@@ -5,10 +5,19 @@ import theme from '@theme/index'
 
 export const ScrollViewContainer = styled(ScrollView).attrs({
   keyboardShouldPersistTaps: 'handled',
-})``
+})`
+  background-color: ${theme.colors.Light};
+`
 
 export const Container = styled.View.attrs({})`
-  padding: ${responsiveSize(15)}px;
-  background-color: #eee;
   flex: 1;
+`
+
+export const Overview = styled.View`
+  padding: ${responsiveSize(15)}px;
+`
+
+export const Text = styled.Text`
+  font-family: ${theme.font_family.Medium};
+  color: ${theme.colors.Gray_700};
 `
