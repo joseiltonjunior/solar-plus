@@ -1,89 +1,19 @@
-import { format } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR/index'
+import logo from '@assets/logo-slim.png'
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
+import { View, Image, Text, TouchableOpacity } from 'react-native'
+import theme from '@theme/index'
 
-import background from '@assets/bkgd.png'
-import {
-  Background,
-  Content,
-  KWpInfo,
-  RowContent,
-  TextKWp,
-  TextValueKWp,
-  UpdateInfo,
-  Climate,
-  Location,
-  ClimateView,
-  LocationView,
-  Icon,
-} from './styles'
-
-import { useEffect, useState } from 'react'
-import { DateProps } from '@utils/types/date'
-import { HeaderProps } from '@utils/types/header'
-
-export function Header({ locale, kwhToday }: HeaderProps) {
-  const [date, setDate] = useState<DateProps>()
-  const [degreesCelsius, setDegreesCelsius] = useState<number>()
-
-  function handleFormatCelcius(kelvin: number) {
-    setDegreesCelsius(parseInt('10', kelvin - 273.15))
-  }
-
-  function handleFormatDate(date: Date) {
-    const day = format(date, 'dd', {
-      locale: ptBR,
-    })
-
-    const month = format(date, 'MMMM', {
-      locale: ptBR,
-    })
-
-    const year = format(date, 'yyyy', {
-      locale: ptBR,
-    })
-
-    const hour = format(date, 'k', {
-      locale: ptBR,
-    })
-
-    const minute = format(date, 'm', {
-      locale: ptBR,
-    })
-
-    setDate({ day, month, year, hour, minute })
-  }
-
-  useEffect(() => {
-    if (locale) {
-      handleFormatDate(locale.update)
-      handleFormatCelcius(locale.temp)
-    }
-  }, [locale])
-
+export function Header() {
   return (
-    <Background source={background}>
-      <Content>
-        <LocationView>
-          <Icon name="map-marker" />
-          <Location>
-            {locale?.locale}, {locale?.country}
-          </Location>
-        </LocationView>
+    <View className="flex-row p-4 items-center">
+      <View className="flex-row gap-2 items-center ml-auto">
+        <Image source={logo} alt="Solar+ logo" className="w-10 h-10" />
+        <Text className="font-bold text-2xl text-[#4FACFE]">Solar+</Text>
+      </View>
 
-        <RowContent>
-          <KWpInfo>
-            <TextValueKWp>{kwhToday}</TextValueKWp>
-            <TextKWp>KWh</TextKWp>
-          </KWpInfo>
-          <ClimateView>
-            <Climate>{degreesCelsius}º c</Climate>
-          </ClimateView>
-        </RowContent>
-      </Content>
-      <UpdateInfo>
-        Última atualização {date?.day} de {date?.month} de {date?.year}, às{' '}
-        {date?.hour}:{date?.minute}
-      </UpdateInfo>
-    </Background>
+      <TouchableOpacity className="ml-auto">
+        <AwesomeIcon name="navicon" size={28} color={theme.colors.Blue_500} />
+      </TouchableOpacity>
+    </View>
   )
 }

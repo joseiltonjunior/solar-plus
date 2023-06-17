@@ -6,6 +6,7 @@ import {
 
 import { Home } from '@screens/Home'
 import { AcessLocation } from '@screens/AcessLocation'
+import { SplashScreen } from '@screens/Splash'
 
 type RootStackParamList = {
   Home: undefined
@@ -19,6 +20,7 @@ const Stack = createStackNavigator()
 export function Routes() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="AcessLocation" component={AcessLocation} />
     </Stack.Navigator>

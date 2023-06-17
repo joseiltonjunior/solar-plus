@@ -1,5 +1,5 @@
 import { Header } from '@components/Header'
-import { Container, Overview, ScrollViewContainer, Text } from './styles'
+
 import { useCallback, useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'
@@ -7,6 +7,9 @@ import { StackNavigationProps } from '@routes/routes'
 import Geolocation from '@react-native-community/geolocation'
 import { weatherAPI } from '@services/weather-api'
 import { LocationInfoProps } from '@utils/types/location'
+import { Background } from './Background'
+import { ScrollView } from 'react-native-gesture-handler'
+import { View } from 'react-native'
 
 export function Home() {
   const [infoLocation, setInfoLocation] = useState<LocationInfoProps>()
@@ -56,13 +59,28 @@ export function Home() {
   }, [CheckLocation])
 
   return (
-    <ScrollViewContainer>
-      <Container>
-        <Header locale={infoLocation} kwhToday="4.32" />
-        <Overview>
-          <Text>Production Energy</Text>
-        </Overview>
-      </Container>
-    </ScrollViewContainer>
+    <ScrollView className="bg-white">
+      <View>
+        <Header />
+
+        <Background locale={infoLocation} kwhToday="4.32" />
+
+        <View className="p-2 bg-slate-200">
+          <View className="flex-row gap-2">
+            <View className="flex-1">
+              <View className="bg-white rounded flex-1 h-32"></View>
+              <View className="bg-white rounded flex-1 h-32 mt-2"></View>
+            </View>
+
+            <View className="bg-white rounded flex-1 h-auto"></View>
+            <View className="bg-white rounded flex-1 h-auto"></View>
+          </View>
+
+          <View className="bg-white rounded flex-1 h-32 mt-2"></View>
+
+          <View className="bg-white rounded flex-1 h-56 mt-2"></View>
+        </View>
+      </View>
+    </ScrollView>
   )
 }
