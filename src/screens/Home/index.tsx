@@ -1,82 +1,71 @@
 import { Header } from '@components/Header'
 
-import { useCallback, useEffect, useState } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProps } from '@routes/routes'
-import Geolocation from '@react-native-community/geolocation'
-import { weatherAPI } from '@services/weather-api'
-import { LocationInfoProps } from '@utils/types/location'
+import { useRoute } from '@react-navigation/native'
+
 import { Background } from './Background'
 import { ScrollView } from 'react-native-gesture-handler'
 import { View } from 'react-native'
+import { RouteParamsProps } from '@routes/routes'
+import { useCallback, useEffect, useState } from 'react'
+import api from '@services/api'
+import { SolarInfoProps } from '@utils/types/solar'
+import { Resume } from './Resume'
+import { Total } from './Total'
+import { Select } from '@components/Select'
 
 export function Home() {
-  const [infoLocation, setInfoLocation] = useState<LocationInfoProps>()
+  const { params } = useRoute<RouteParamsProps<'Home'>>()
+  const {
+    localeInfo,
+    solarInfoHourly,
+    solarInfoDaily,
+    solarInfoMonthly,
+    solarInfoYearly,
+  } = params
 
-  const navigation = useNavigation<StackNavigationProps>()
+  const [solarAttInfo, setSolarAttInfo] = useState<SolarInfoProps>()
 
-  const GetCurrentWeather = useCallback(() => {
-    Geolocation.getCurrentPosition(
-      async ({ coords: { latitude, longitude } }) => {
-        const { data } = await weatherAPI.get(
-          `/weather?lat=${latitude}&lon=${longitude}&appid=19304a0bf354c6f5ceb08d8952a2ce64`,
-        )
-
-        const { temp } = data.main
-        const { name: locale } = data
-        const { country } = data.sys
-        const { description } = data.weather[0]
-
-        setInfoLocation({
-          locale,
-          country,
-          description,
-          temp,
-          update: new Date(),
-        })
-      },
-      () => {
-        console.log('tratar error')
-      },
-      {
-        timeout: 20000,
-      },
-    )
+  const handleGetSolarInfo = useCallback(async (period: string) => {
+    await api
+      .get(`/test-2023?dataType=${period}`)
+      .then((result) => {
+        const { data } = result.data
+        setSolarAttInfo(data)
+      })
+      .catch((err) => console.log(err))
   }, [])
 
-  const CheckLocation = useCallback(async () => {
-    const value = await AsyncStorage.getItem('acessLocation')
-    if (value !== null) {
-      GetCurrentWeather()
-    } else {
-      navigation.navigate('AcessLocation')
-    }
-  }, [GetCurrentWeather, navigation])
-
   useEffect(() => {
-    CheckLocation()
-  }, [CheckLocation])
+    if (solarInfoHourly) {
+      setSolarAttInfo(solarInfoHourly)
+    }
+  }, [solarInfoHourly])
 
   return (
     <ScrollView className="bg-white">
       <View>
         <Header />
 
-        <Background locale={infoLocation} kwhToday="4.32" />
+        <Background
+          localeInfo={localeInfo}
+          latestKwhGeneration={
+            solarInfoHourly.generation[solarInfoHourly.generation.length - 1]
+          }
+        />
 
         <View className="p-2 bg-slate-200">
-          <View className="flex-row gap-2">
-            <View className="flex-1">
-              <View className="bg-white rounded flex-1 h-32"></View>
-              <View className="bg-white rounded flex-1 h-32 mt-2"></View>
-            </View>
+          <Select
+            className="mb-2"
+            onAction={(item) => handleGetSolarInfo(item.value)}
+          />
 
-            <View className="bg-white rounded flex-1 h-auto"></View>
-            <View className="bg-white rounded flex-1 h-auto"></View>
-          </View>
+          <Resume solarInfo={solarAttInfo} />
 
-          <View className="bg-white rounded flex-1 h-32 mt-2"></View>
+          <Total
+            kwhToday={solarInfoDaily.totals.kwh}
+            kwhMonth={solarInfoMonthly.totals.kwh}
+            kwhYear={solarInfoYearly.totals.kwh}
+          />
 
           <View className="bg-white rounded flex-1 h-56 mt-2"></View>
         </View>

@@ -1,7 +1,7 @@
-export interface LocationInfoProps {
+export interface LocaleInfoProps {
   locale: string
   country: string
   temp: number
   description: string
-  update: Date
+  update_at: string
 }

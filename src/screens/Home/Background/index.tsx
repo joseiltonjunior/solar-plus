@@ -6,10 +6,11 @@ import ptBR from 'date-fns/locale/pt-BR/index'
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import background from '@assets/bkgd.png'
 import { DateProps } from '@utils/types/date'
+import colors from 'tailwindcss/colors'
 
 import { ImageBackground, Text, View } from 'react-native'
 
-export function Background({ locale, kwhToday }: HeaderProps) {
+export function Background({ localeInfo, latestKwhGeneration }: HeaderProps) {
   const [date, setDate] = useState<DateProps>()
   const [degreesCelsius, setDegreesCelsius] = useState<number>()
 
@@ -17,7 +18,9 @@ export function Background({ locale, kwhToday }: HeaderProps) {
     setDegreesCelsius(parseInt('10', kelvin - 273.15))
   }
 
-  function handleFormatDate(date: Date) {
+  function handleFormatDate(updateAt: string) {
+    const date = new Date(updateAt)
+
     const day = format(date, 'dd', {
       locale: ptBR,
     })
@@ -30,11 +33,11 @@ export function Background({ locale, kwhToday }: HeaderProps) {
       locale: ptBR,
     })
 
-    const hour = format(date, 'k', {
+    const hour = format(date, 'kk', {
       locale: ptBR,
     })
 
-    const minute = format(date, 'm', {
+    const minute = format(date, 'mm', {
       locale: ptBR,
     })
 
@@ -42,25 +45,27 @@ export function Background({ locale, kwhToday }: HeaderProps) {
   }
 
   useEffect(() => {
-    if (locale) {
-      handleFormatDate(locale.update)
-      handleFormatCelcius(locale.temp)
+    if (localeInfo) {
+      handleFormatDate(localeInfo.update_at)
+      handleFormatCelcius(localeInfo.temp)
     }
-  }, [locale])
+  }, [localeInfo])
 
   return (
     <ImageBackground source={background}>
       <View className="p-6 pl-4 pr-4">
         <View className="flex-row gap-2 items-center pt-6 pb-6">
-          <AwesomeIcon name="map-marker" size={25} color={'#fff'} />
+          <AwesomeIcon name="map-marker" size={25} color={colors.white} />
           <Text className="font-bold text-base text-white">
-            {locale?.locale}, {locale?.country}
+            {localeInfo?.locale}, {localeInfo?.country}
           </Text>
         </View>
 
         <View className="flex-row justify-between items-center">
           <View className="flex-row items-end">
-            <Text className="font-bold text-3xl text-white">{kwhToday}</Text>
+            <Text className="font-bold text-3xl text-white">
+              {latestKwhGeneration}
+            </Text>
             <Text className="text-white mb-1">KWh</Text>
           </View>
           <View>
@@ -72,7 +77,7 @@ export function Background({ locale, kwhToday }: HeaderProps) {
       </View>
 
       <View className="bg-black/60">
-        <Text className="text-white text-center text-sm p-1">
+        <Text className="text-white text-center text-xs p-1">
           Última atualização {date?.day} de {date?.month} de {date?.year}, às{' '}
           {date?.hour}:{date?.minute}
         </Text>

@@ -1,6 +1,6 @@
-import { LocationInfoProps } from './location'
+import { LocaleInfoProps } from './locale'
 
 export interface HeaderProps {
-  locale?: LocationInfoProps
-  kwhToday?: string
+  localeInfo?: LocaleInfoProps
+  latestKwhGeneration?: number
 }
