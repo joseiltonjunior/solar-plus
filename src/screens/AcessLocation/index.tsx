@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { PERMISSIONS, request, RESULTS, check } from 'react-native-permissions'
-import { BackHandler } from 'react-native'
+import { BackHandler, Image, Text, View } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import locationIcon from '@assets/map.png'
 
 import { Button } from '@components/Button'
 import { Modal } from '@components/Modal'
 
-import {
-  Container,
-  ScrollView,
-  ViewText,
-  Text,
-  Title,
-  ViewIcons,
-  IconLocation,
-  ViewButtom,
-} from './styles'
 import { StackNavigationProps } from '@routes/routes'
 
 export function AcessLocation() {
@@ -36,7 +26,7 @@ export function AcessLocation() {
           await AsyncStorage.setItem('acessLocation', 'true')
           navigation.reset({
             index: 0,
-            routes: [{ name: 'Home' }],
+            routes: [{ name: 'Splash' }],
           })
         } else if (res === RESULTS.BLOCKED) {
           setLoading(false)
@@ -49,12 +39,11 @@ export function AcessLocation() {
                 await AsyncStorage.setItem('acessLocation', 'true')
                 navigation.reset({
                   index: 0,
-                  routes: [{ name: 'Home' }],
+                  routes: [{ name: 'Splash' }],
                 })
               } else {
                 setLoading(false)
-                console.log(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
-                setModalDenied(true)
+                setModalBlock(true)
               }
             },
           )
@@ -62,7 +51,7 @@ export function AcessLocation() {
       })
     } catch (error) {
       setLoading(false)
-      setModalDenied(true)
+      setModalBlock(true)
     }
   }
 
@@ -81,7 +70,7 @@ export function AcessLocation() {
   }, [])
 
   return (
-    <ScrollView>
+    <>
       <Modal
         title="Atenção"
         description="O Solar+ requer acesso ao GPS para fornecer funcionalidades precisas. No entanto, parece que você bloqueou as permissões de localização do aplicativo. Para continuar utilizando todos os recursos do Solar+, por favor, atualize as permissões de localização do aplicativo."
@@ -113,30 +102,31 @@ export function AcessLocation() {
         }}
       />
 
-      <Container>
-        <ViewText>
-          <Title>Precisamos da sua localização</Title>
-          <Text>
+      <View className="p-4 items-center justify-center flex-1">
+        <View className="items-center">
+          <Text className="font-bold text-gray-600 text-lg">
+            Precisamos da sua localização
+          </Text>
+          <Text className="text-center text-base mt-4">
             Para fornecermos dados mais completos, por favor, permita o acesso à
             sua localização.
           </Text>
-        </ViewText>
-        <ViewIcons>
-          <IconLocation source={locationIcon} />
-        </ViewIcons>
-        <ViewButtom>
-          <Button
-            activeOpacity={0.5}
-            isLoading={loading}
-            onPress={() => {
-              AllowLocation()
-            }}
-          >
-            Permitir localização
-          </Button>
-        </ViewButtom>
-      </Container>
-    </ScrollView>
+        </View>
+
+        <Image source={locationIcon} alt="map icon" className="mt-12" />
+
+        <Button
+          className="mt-12 w-full"
+          activeOpacity={0.5}
+          isLoading={loading}
+          onPress={() => {
+            AllowLocation()
+          }}
+        >
+          Permitir localização
+        </Button>
+      </View>
+    </>
   )
 }
 

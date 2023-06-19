@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.2",
@@ -20,6 +21,7 @@
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-native": "0.71.10",
+    "react-native-chart-kit": "^6.12.0",
     "react-native-gesture-handler": "^2.12.0",
     "react-native-permissions": "^3.8.0",
     "react-native-safe-area-context": "^4.5.3",
@@ -27,7 +29,8 @@
     "react-native-svg": "^13.9.0",
     "react-native-vector-icons": "^9.2.0",
     "reactotron-react-native": "^5.0.3",
-    "styled-components": "^6.0.0-rc.3"
+    "styled-components": "^6.0.0-rc.3",
+    "victory-native": "^36.6.11"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -50,7 +53,8 @@
     "prettier": "^2.4.1",
     "react-test-renderer": "18.2.0",
     "tailwindcss": "^3.3.2",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "vitest": "^0.32.2"
   },
   "jest": {
     "preset": "react-native"

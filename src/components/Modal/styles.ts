@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
 
 import { responsiveSize } from '@utils/responsive'
-import theme from '@theme/index'
+
+import colors from 'tailwindcss/colors'
 
 interface DynamicButtonProps {
   variant: 'cancel' | 'confirm'
@@ -17,7 +18,7 @@ export const Container = styled.View`
 
 export const Card = styled.View`
   width: 100%;
-  background-color: ${theme.colors.Light};
+  background-color: ${colors.white};
   border-radius: 8px;
   padding: ${responsiveSize(16)}px;
   justify-content: center;
@@ -28,14 +29,14 @@ export const Card = styled.View`
 export const Title = styled.Text`
   font-family: 'Roboto-Bold';
   font-size: ${responsiveSize(18)}px;
-  color: ${theme.colors.Blue_500};
+  color: ${colors.blue[400]};
   align-self: center;
   text-align: center;
   margin-bottom: ${responsiveSize(20)}px;
 `
 
 export const Info = styled.Text`
-  color: ${theme.colors.Gray_500};
+  color: ${colors.gray[500]};
   font-family: 'Roboto-Regular';
   font-size: ${responsiveSize(16)}px;
   text-align: center;
@@ -46,10 +47,10 @@ export const DynamicButton = styled.TouchableOpacity<DynamicButtonProps>`
   height: ${responsiveSize(50)}px;
   background-color: ${(props: DynamicButtonProps) =>
     props.variant === 'cancel'
-      ? theme.colors.Red_600
+      ? colors.red[600]
       : props.variant === 'confirm'
-      ? theme.colors.Green_400
-      : theme.colors.Blue_500};
+      ? colors.green[600]
+      : colors.blue[500]};
   border-radius: 8px;
   justify-content: center;
 `
@@ -65,7 +66,7 @@ export const Text = styled.Text`
   align-self: center;
   font-family: 'Roboto-Bold';
   font-size: ${responsiveSize(16)}px;
-  color: ${theme.colors.Light};
+  color: ${colors.white};
 `
 
 export const ModalView = styled.Modal``

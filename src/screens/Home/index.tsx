@@ -12,6 +12,7 @@ import { SolarInfoProps } from '@utils/types/solar'
 import { Resume } from './Resume'
 import { Total } from './Total'
 import { Select } from '@components/Select'
+import { Chart } from './Chart'
 
 export function Home() {
   const { params } = useRoute<RouteParamsProps<'Home'>>()
@@ -48,9 +49,7 @@ export function Home() {
 
         <Background
           localeInfo={localeInfo}
-          latestKwhGeneration={
-            solarInfoHourly.generation[solarInfoHourly.generation.length - 1]
-          }
+          latestKwhGeneration={solarInfoHourly.totals.kwh}
         />
 
         <View className="p-2 bg-slate-200">
@@ -67,7 +66,7 @@ export function Home() {
             kwhYear={solarInfoYearly.totals.kwh}
           />
 
-          <View className="bg-white rounded flex-1 h-56 mt-2"></View>
+          <Chart solarInfo={solarAttInfo} />
         </View>
       </View>
     </ScrollView>

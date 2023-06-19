@@ -14,13 +14,16 @@ interface SelectProps {
 
 export function Select({ onAction, ...rest }: SelectProps) {
   const [isVisible, setIsVisible] = useState(false)
-  const [value, setValue] = useState<ItemSelectProps>()
+  const [value, setValue] = useState<ItemSelectProps>({
+    name: 'Hora',
+    value: 'hourly',
+  })
 
   const filter = [
-    { name: 'Por hora', value: 'hourly' },
-    { name: 'Hoje', value: 'daily' },
-    { name: 'Este mês', value: 'monthly' },
-    { name: 'Este ano', value: 'yearly' },
+    { name: 'hora', value: 'hourly' },
+    { name: 'dia', value: 'daily' },
+    { name: 'mês', value: 'monthly' },
+    { name: 'ano', value: 'yearly' },
   ]
 
   return (
@@ -29,8 +32,8 @@ export function Select({ onAction, ...rest }: SelectProps) {
         className="py-2 px-4 flex-row justify-between items-center bg-white"
         onPress={() => setIsVisible(!isVisible)}
       >
-        <Text className="font-bold text-gray-950 text-base">
-          {!value ? 'Filtrar por período' : value.name}
+        <Text className="font-bold text-gray-600 text-base">
+          Filtrar por {value.name}
         </Text>
         <AwesomeIcon name={isVisible ? `caret-up` : `caret-down`} />
       </TouchableOpacity>
