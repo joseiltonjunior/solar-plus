@@ -15,6 +15,7 @@ module.exports = {
           '@utils': './src/utils',
           '@config': './src/config',
           '@services': './src/services',
+          '@storage': './src/storage',
         },
       },
     ],

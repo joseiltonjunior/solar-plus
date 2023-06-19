@@ -9,25 +9,24 @@ import 'react-native-gesture-handler'
 import React from 'react'
 import { StatusBar } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
-import { ThemeProvider } from 'styled-components'
+
+import { Provider } from 'react-redux'
+import { store } from '@storage/index'
 
 import { Routes } from '@routes/routes'
-import theme from '@theme/index'
 
 import '@config/ReactotronConfig'
+import colors from 'tailwindcss/colors'
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <Provider store={store}>
       <NavigationContainer>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={theme.colors.Light}
-        />
+        <StatusBar barStyle="light-content" backgroundColor={colors.white} />
 
         <Routes />
       </NavigationContainer>
-    </ThemeProvider>
+    </Provider>
   )
 }
 

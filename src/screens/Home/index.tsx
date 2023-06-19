@@ -13,6 +13,7 @@ import { Resume } from './Resume'
 import { Total } from './Total'
 import { Select } from '@components/Select'
 import { Chart } from './Chart'
+import { Menu } from '@components/Menu'
 
 export function Home() {
   const { params } = useRoute<RouteParamsProps<'Home'>>()
@@ -46,6 +47,7 @@ export function Home() {
     <ScrollView className="bg-white">
       <View>
         <Header />
+        <Menu />
 
         <Background
           localeInfo={localeInfo}
