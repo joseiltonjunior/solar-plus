@@ -1,16 +1,7 @@
 import React from 'react'
-import { ViewProps } from 'react-native'
+import { TouchableOpacity, View, ViewProps, Text } from 'react-native'
 
-import {
-  Container,
-  Card,
-  Info,
-  Title,
-  Text,
-  DynamicButton,
-  ViewButtons,
-  ModalView,
-} from './styles'
+import { ModalView } from './styles'
 
 interface ModalProps extends ViewProps {
   show: boolean
@@ -39,38 +30,51 @@ export function Modal({
 }: ModalProps) {
   return (
     <ModalView animationType="slide" transparent visible={show}>
-      <Container>
-        <Card>
-          <Title>{title}</Title>
-          <Info>{description}</Info>
+      <View className="flex-1 bg-black/50 justify-center items-center p-4">
+        <View className="bg-white w-full rounded-2xl p-4">
+          <Text className="font-bold text-blue-500 text-lg text-center">
+            {title}
+          </Text>
+          <Text className="text-gray-500 font-medium text-base mt-4 text-center">
+            {description}
+          </Text>
 
-          <ViewButtons>
+          <View className="flex-row mt-8">
             {twoActions && (
               <>
-                <DynamicButton
+                <TouchableOpacity
                   onPress={twoActions.actionCancel}
-                  variant="cancel"
+                  className="flex-1 bg-red-600 h-12 rounded-lg items-center justify-center"
                 >
-                  <Text>{twoActions.textCancel}</Text>
-                </DynamicButton>
+                  <Text className="text-white font-bold text-base">
+                    {twoActions.textCancel}
+                  </Text>
+                </TouchableOpacity>
 
-                <DynamicButton
+                <TouchableOpacity
                   onPress={twoActions.actionConfirm}
-                  variant="confirm"
+                  className="flex-1 bg-green-600 h-12 rounded-lg items-center justify-center ml-2"
                 >
-                  <Text>{twoActions.textConfirm}</Text>
-                </DynamicButton>
+                  <Text className="text-white font-bold text-base">
+                    {twoActions.textConfirm}
+                  </Text>
+                </TouchableOpacity>
               </>
             )}
 
             {singleAction && (
-              <DynamicButton onPress={singleAction.action}>
-                <Text>{singleAction.title}</Text>
-              </DynamicButton>
+              <TouchableOpacity
+                onPress={singleAction.action}
+                className="flex-1 bg-blue-500 h-12 rounded-lg items-center justify-center"
+              >
+                <Text className="text-white font-bold text-base">
+                  {singleAction.title}
+                </Text>
+              </TouchableOpacity>
             )}
-          </ViewButtons>
-        </Card>
-      </Container>
+          </View>
+        </View>
+      </View>
     </ModalView>
   )
 }

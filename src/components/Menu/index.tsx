@@ -52,16 +52,14 @@ export function Menu() {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity className="p-3 items-center border-t border-white/50">
-          <Text
-            className="font-bold text-base text-white"
-            onPress={() => {
-              dispatch(showMenu())
-              setModalLeaving(true)
-            }}
-          >
-            Sair
-          </Text>
+        <TouchableOpacity
+          className="p-3 items-center border-t border-white/50"
+          onPress={() => {
+            dispatch(showMenu())
+            setModalLeaving(true)
+          }}
+        >
+          <Text className="font-bold text-base text-white">Sair</Text>
         </TouchableOpacity>
       </View>
     </>

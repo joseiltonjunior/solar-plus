@@ -88,9 +88,13 @@ export function Chart({ solarInfo }: chartProps) {
 
   return (
     <View className="bg-white rounded flex-1 justify-center items-center mt-2">
-      <Text className="font-bold text-base text-gray-600 mt-4">
-        Energia Gerada x Expectativa
-      </Text>
+      <View className="flex-row gap-2 mt-2">
+        <Text className="font-bold text-base text-green-600 ">
+          Energia Gerada
+        </Text>
+        <Text className="font-bold text-base text-gray-600/50">x</Text>
+        <Text className="font-bold text-base text-red-600 ">Expectativa</Text>
+      </View>
 
       <VictoryChart
         theme={VictoryTheme.material}

@@ -7,7 +7,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { View } from 'react-native'
 import { RouteParamsProps } from '@routes/routes'
 import { useCallback, useEffect, useState } from 'react'
-import api from '@services/api'
+
 import { SolarInfoProps } from '@utils/types/solar'
 import { Resume } from './Resume'
 import { Total } from './Total'
@@ -27,15 +27,31 @@ export function Home() {
 
   const [solarAttInfo, setSolarAttInfo] = useState<SolarInfoProps>()
 
-  const handleGetSolarInfo = useCallback(async (period: string) => {
-    await api
-      .get(`/test-2023?dataType=${period}`)
-      .then((result) => {
-        const { data } = result.data
-        setSolarAttInfo(data)
-      })
-      .catch((err) => console.log(err))
-  }, [])
+  const handleGetSolarInfo = useCallback(
+    async (period: string) => {
+      switch (period) {
+        case 'hourly':
+          setSolarAttInfo(solarInfoHourly)
+          return
+
+        case 'daily':
+          setSolarAttInfo(solarInfoDaily)
+          return
+
+        case 'monthly':
+          setSolarAttInfo(solarInfoMonthly)
+          return
+
+        case 'yearly':
+          setSolarAttInfo(solarInfoYearly)
+          return
+
+        default:
+          setSolarAttInfo(solarInfoHourly)
+      }
+    },
+    [solarInfoDaily, solarInfoHourly, solarInfoMonthly, solarInfoYearly],
+  )
 
   useEffect(() => {
     if (solarInfoHourly) {

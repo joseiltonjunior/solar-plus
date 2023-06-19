@@ -104,10 +104,10 @@ export function AcessLocation() {
 
       <View className="p-4 items-center justify-center flex-1">
         <View className="items-center">
-          <Text className="font-bold text-gray-600 text-lg">
+          <Text className="font-bold text-blue-500 text-xl">
             Precisamos da sua localização
           </Text>
-          <Text className="text-center text-base mt-4">
+          <Text className="text-center text-base mt-4 font-medium">
             Para fornecermos dados mais completos, por favor, permita o acesso à
             sua localização.
           </Text>

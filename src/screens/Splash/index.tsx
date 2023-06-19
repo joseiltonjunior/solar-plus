@@ -1,7 +1,7 @@
 import AnimatedLottieView from 'lottie-react-native'
 import splashJson from '@assets/splash.json'
-import { Dimensions, View } from 'react-native'
-import { useCallback, useEffect } from 'react'
+import { BackHandler, Dimensions, View } from 'react-native'
+import { useCallback, useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps } from '@routes/routes'
 
@@ -10,11 +10,13 @@ import weatherAPI from '@services/weather-api'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import api from '@services/api'
 import { LocaleInfoProps } from '@utils/types/locale'
+import { Modal } from '@components/Modal'
 
 const size = Dimensions.get('window').width * 0.9
 
 export function SplashScreen() {
   const navigation = useNavigation<StackNavigationProps>()
+  const [modalError, setModalError] = useState(false)
 
   const handleGetSolarInfo = useCallback(
     async (localeInfo: LocaleInfoProps) => {
@@ -40,7 +42,7 @@ export function SplashScreen() {
           ],
         })
       } catch (error) {
-        console.log(error)
+        setModalError(true)
       }
     },
     [navigation],
@@ -72,7 +74,7 @@ export function SplashScreen() {
         handleGetSolarInfo(localeInfo)
       },
       () => {
-        console.log('tratar error')
+        setModalError(true)
       },
       {
         timeout: 20000,
@@ -94,14 +96,28 @@ export function SplashScreen() {
   }, [CheckLocation])
 
   return (
-    <View className="flex-1 items-center justify-center bg-blue-500">
-      <AnimatedLottieView
-        source={splashJson}
-        autoPlay
-        loop
-        resizeMode="contain"
-        style={{ width: size, height: size }}
+    <>
+      <Modal
+        title="Opss.."
+        description="Desculpe-nos, atualmente estamos enfrentando dificuldades para acessar os dados solicitados. Por favor, tente novamente em um momento posterior."
+        show={modalError}
+        singleAction={{
+          title: 'Sair',
+          action() {
+            setModalError(false)
+            BackHandler.exitApp()
+          },
+        }}
       />
-    </View>
+      <View className="flex-1 items-center justify-center bg-blue-500">
+        <AnimatedLottieView
+          source={splashJson}
+          autoPlay
+          loop
+          resizeMode="contain"
+          style={{ width: size, height: size }}
+        />
+      </View>
+    </>
   )
 }
