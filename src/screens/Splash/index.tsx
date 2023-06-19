@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps } from '@routes/routes'
 
 import Geolocation from '@react-native-community/geolocation'
-import { weatherAPI } from '@services/weather-api'
+import weatherAPI from '@services/weather-api'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import api from '@services/api'
 import { LocaleInfoProps } from '@utils/types/locale'
