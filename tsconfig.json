@@ -24,8 +24,14 @@
       "@utils/*": [
         "./src/utils/*"
       ],
+      "@storage/*": [
+        "./src/storage/*"
+      ],
       "@config/*": [
         "./src/config/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
       ]
     }
   }
