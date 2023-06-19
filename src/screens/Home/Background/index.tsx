@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR/index'
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
-import background from '@assets/bkgd.png'
+import background from '@assets/panel-solar-bg.png'
 import { DateProps } from '@utils/types/date'
 import colors from 'tailwindcss/colors'
 
