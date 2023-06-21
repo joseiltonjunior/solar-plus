@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FlatList, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Text, View, TouchableHighlight } from 'react-native'
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
 
 interface ItemSelectProps {
@@ -15,7 +15,7 @@ interface SelectProps {
 export function Select({ onAction, ...rest }: SelectProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [value, setValue] = useState<ItemSelectProps>({
-    name: 'Hora',
+    name: 'hora',
     value: 'hourly',
   })
 
@@ -28,15 +28,18 @@ export function Select({ onAction, ...rest }: SelectProps) {
 
   return (
     <View {...rest} className="rounded overflow-hidden">
-      <TouchableOpacity
-        className="py-2 px-4 flex-row justify-between items-center bg-white"
+      <TouchableHighlight
+        underlayColor={'rgba(0,0,0,0.3)'}
+        className="py-2 px-4 flex-row justify-between items-center bg-white "
         onPress={() => setIsVisible(!isVisible)}
       >
-        <Text className="font-bold text-gray-600 text-base">
-          Filtrar por {value.name}
-        </Text>
-        <AwesomeIcon name={isVisible ? `caret-up` : `caret-down`} />
-      </TouchableOpacity>
+        <View className="flex-row justify-between items-center flex-1">
+          <Text className="font-bold text-gray-600 text-base">
+            Filtrar por {value.name}
+          </Text>
+          <AwesomeIcon name={isVisible ? `caret-up` : `caret-down`} />
+        </View>
+      </TouchableHighlight>
 
       {isVisible && (
         <FlatList
@@ -45,18 +48,19 @@ export function Select({ onAction, ...rest }: SelectProps) {
           data={filter}
           keyExtractor={(item) => item.name}
           renderItem={(item) => (
-            <TouchableOpacity
+            <TouchableHighlight
+              underlayColor={'rgba(0,0,0,0.3)'}
               className={`p-3 ${
                 item.index + 1 !== filter.length && 'border-b border-white/50'
-              } `}
+              } focus:bg-slate-600`}
               onPress={() => {
                 setValue(item.item)
                 onAction(item.item)
                 setIsVisible(false)
               }}
             >
-              <Text className="font-medium text-white">{item.item.name}</Text>
-            </TouchableOpacity>
+              <Text className="font-bold text-white">{item.item.name}</Text>
+            </TouchableHighlight>
           )}
         />
       )}

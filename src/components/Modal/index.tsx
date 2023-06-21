@@ -1,7 +1,14 @@
 import React from 'react'
-import { TouchableOpacity, View, ViewProps, Text } from 'react-native'
+import {
+  TouchableOpacity,
+  View,
+  ViewProps,
+  Text,
+  TouchableHighlight,
+} from 'react-native'
 
 import { ModalView } from './styles'
+import colors from 'tailwindcss/colors'
 
 interface ModalProps extends ViewProps {
   show: boolean
@@ -42,23 +49,25 @@ export function Modal({
           <View className="flex-row mt-8">
             {twoActions && (
               <>
-                <TouchableOpacity
+                <TouchableHighlight
+                  underlayColor={colors.red[800]}
                   onPress={twoActions.actionCancel}
                   className="flex-1 bg-red-600 h-12 rounded-lg items-center justify-center"
                 >
                   <Text className="text-white font-bold text-base">
                     {twoActions.textCancel}
                   </Text>
-                </TouchableOpacity>
+                </TouchableHighlight>
 
-                <TouchableOpacity
+                <TouchableHighlight
+                  underlayColor={colors.green[800]}
                   onPress={twoActions.actionConfirm}
                   className="flex-1 bg-green-600 h-12 rounded-lg items-center justify-center ml-2"
                 >
                   <Text className="text-white font-bold text-base">
                     {twoActions.textConfirm}
                   </Text>
-                </TouchableOpacity>
+                </TouchableHighlight>
               </>
             )}
 

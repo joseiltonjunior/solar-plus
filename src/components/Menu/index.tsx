@@ -5,7 +5,7 @@ import { ReduxProps } from '@storage/index'
 import { showMenu } from '@storage/menu/action'
 import { useState } from 'react'
 
-import { BackHandler, Text, TouchableOpacity, View } from 'react-native'
+import { BackHandler, Text, View, TouchableHighlight } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
 export function Menu() {
@@ -40,7 +40,8 @@ export function Menu() {
           !isVisible && `hidden`
         }`}
       >
-        <TouchableOpacity
+        <TouchableHighlight
+          underlayColor={'rgba(0,0,0,0.3)'}
           className="p-3 items-center"
           onPress={() => {
             dispatch(showMenu())
@@ -50,9 +51,10 @@ export function Menu() {
           <Text className="font-bold text-base text-white">
             Atualizar dados
           </Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
 
-        <TouchableOpacity
+        <TouchableHighlight
+          underlayColor={'rgba(0,0,0,0.3)'}
           className="p-3 items-center border-t border-white/50"
           onPress={() => {
             dispatch(showMenu())
@@ -60,7 +62,7 @@ export function Menu() {
           }}
         >
           <Text className="font-bold text-base text-white">Sair</Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
       </View>
     </>
   )
