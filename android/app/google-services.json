@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "922127434717",
-    "project_id": "portfolio-api-fc7dd",
-    "storage_bucket": "portfolio-api-fc7dd.appspot.com"
+    "project_number": "724278631141",
+    "project_id": "solar-plus-9b684",
+    "storage_bucket": "solar-plus-9b684.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:922127434717:android:cdaba32e683c9462b0ec34",
+        "mobilesdk_app_id": "1:724278631141:android:d7e4b85c1ac68b28bbd20c",
         "android_client_info": {
           "package_name": "com.geracao_verde"
         }
       },
       "oauth_client": [
         {
-          "client_id": "922127434717-snovirnlet2oi1dfmpjfoc9tli4dh5pf.apps.googleusercontent.com",
+          "client_id": "724278631141-4qa5m43tvfgl0g162262utv6fr7tkuuj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCXcy2XV5vVcqxHaNvYe_hPK54TMhR75Ms"
+          "current_key": "AIzaSyD2JMlqti7W8aL8t_e9jiMnSBEWOeE4Oo0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "922127434717-snovirnlet2oi1dfmpjfoc9tli4dh5pf.apps.googleusercontent.com",
+              "client_id": "724278631141-4qa5m43tvfgl0g162262utv6fr7tkuuj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
