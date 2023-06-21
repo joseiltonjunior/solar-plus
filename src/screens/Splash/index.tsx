@@ -54,27 +54,33 @@ export function SplashScreen() {
   const GetCurrentWeather = useCallback(() => {
     Geolocation.getCurrentPosition(
       async ({ coords: { latitude, longitude } }) => {
-        const { data } = await weatherAPI.get(
-          `/weather?lat=${latitude}&lon=${longitude}&appid=19304a0bf354c6f5ceb08d8952a2ce64`,
-        )
+        try {
+          const { data } = await weatherAPI.get(
+            `/weather?lat=${latitude}&lon=${longitude}&appid=19304a0bf354c6f5ceb08d8952a2ce64`,
+          )
 
-        const { temp } = data.main
-        const { name: locale } = data
-        const { country } = data.sys
-        const { description } = data.weather[0]
+          const { temp } = data.main
+          const { name: locale } = data
+          const { country } = data.sys
+          const { description } = data.weather[0]
 
-        const currentDate = new Date()
-        const formattedDate = currentDate.toISOString()
+          const currentDate = new Date()
+          const formattedDate = currentDate.toISOString()
 
-        const localeInfo = {
-          locale,
-          country,
-          description,
-          temp,
-          update_at: formattedDate,
+          const localeInfo = {
+            locale,
+            country,
+            description,
+            temp,
+            update_at: formattedDate,
+          }
+
+          handleGetSolarInfo(localeInfo)
+        } catch (error) {
+          const err = error as Error
+          crashlytics().recordError(err)
+          setModalError(true)
         }
-
-        handleGetSolarInfo(localeInfo)
       },
       (error) => {
         crashlytics().recordError({

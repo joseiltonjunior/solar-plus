@@ -88,12 +88,11 @@ export function Chart({ solarInfo }: chartProps) {
 
   return (
     <View className="bg-white rounded flex-1 justify-center items-center mt-2">
-      <View className="flex-row gap-2 mt-2">
-        <Text className="font-bold text-base text-green-600 ">
-          Energia Gerada
-        </Text>
-        <Text className="font-bold text-base text-gray-600/50">x</Text>
-        <Text className="font-bold text-base text-red-600 ">Expectativa</Text>
+      <View className="flex-row gap-2 mt-2 items-center justify-center">
+        <Text className="font-bold text-lg text-blue-500 ">Energia Gerada</Text>
+        <Text className="font-bold text-sm text-gray-700/50">x</Text>
+        <Text className="font-bold text-lg text-yellow-400 ">Expectativa</Text>
+        <Text className="font-bold text-sm text-gray-700/50">(KWh)</Text>
       </View>
 
       <VictoryChart
@@ -112,11 +111,10 @@ export function Chart({ solarInfo }: chartProps) {
               fontSize: solarInfo?.data_type === 'daily' ? 8.5 : 12,
               padding: 5,
             },
-
-            axis: { stroke: 'transparent' },
           }}
         />
         <VictoryAxis
+          fixLabelOverlap
           dependentAxis
           tickFormat={(x) => x}
           style={{
@@ -125,15 +123,17 @@ export function Chart({ solarInfo }: chartProps) {
         />
 
         <VictoryLine
+          interpolation="catmullRom"
           style={{
-            data: { stroke: colors.green[600] },
+            data: { stroke: '#4FACFE', strokeWidth: 3 },
           }}
           data={dataGenerate}
         />
 
         <VictoryLine
+          interpolation="catmullRom"
           style={{
-            data: { stroke: colors.red[600] },
+            data: { stroke: colors.yellow[400], strokeWidth: 3 },
           }}
           data={dataExpect}
         />
