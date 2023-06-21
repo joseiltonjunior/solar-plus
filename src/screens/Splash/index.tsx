@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import api from '@services/api'
 import { LocaleInfoProps } from '@utils/types/locale'
 import { Modal } from '@components/Modal'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 const size = Dimensions.get('window').width * 0.9
 
@@ -42,6 +43,8 @@ export function SplashScreen() {
           ],
         })
       } catch (error) {
+        const err = error as Error
+        crashlytics().recordError(err)
         setModalError(true)
       }
     },
@@ -73,7 +76,11 @@ export function SplashScreen() {
 
         handleGetSolarInfo(localeInfo)
       },
-      () => {
+      (error) => {
+        crashlytics().recordError({
+          message: error.message,
+          name: error.code.toString(),
+        })
         setModalError(true)
       },
       {
