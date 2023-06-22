@@ -16,13 +16,12 @@ import { store } from '@storage/index'
 import { Routes } from '@routes/routes'
 
 import '@config/ReactotronConfig'
-import colors from 'tailwindcss/colors'
 
 function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <StatusBar barStyle="light-content" backgroundColor={colors.white} />
+        <StatusBar hidden />
 
         <Routes />
       </NavigationContainer>

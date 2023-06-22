@@ -10,7 +10,7 @@ import { Modal } from '@components/Modal'
 
 import { StackNavigationProps } from '@routes/routes'
 
-export function AcessLocation() {
+export function AccessLocation() {
   const [loading, setLoading] = useState(false)
   const [modalBlock, setModalBlock] = useState(false)
   const [modalDenied, setModalDenied] = useState(false)
@@ -129,5 +129,3 @@ export function AcessLocation() {
     </>
   )
 }
-
-export default AcessLocation
