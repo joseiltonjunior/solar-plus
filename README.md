@@ -5,7 +5,7 @@
 
 
 <div align="center">
-  <img src="https://i.ibb.co/grXQG1g/C-pia-de-C-pia-de-C-pia-de-Tela-produto-1.png" alt="auth" border="0">  
+  <img src="https://i.ibb.co/Lz3HH3h/solar-plus.png" alt="auth" border="0">  
 </div>
 
 <br/>
