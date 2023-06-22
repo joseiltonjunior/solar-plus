@@ -21,7 +21,7 @@ function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <StatusBar hidden />
+        <StatusBar backgroundColor={'#202022'} />
 
         <Routes />
       </NavigationContainer>

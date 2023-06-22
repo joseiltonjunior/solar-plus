@@ -36,7 +36,7 @@ export function Menu() {
         }}
       />
       <View
-        className={`bg-blue-400 z-50 w-1/2 absolute top-16 right-4 rounded overflow-hidden ${
+        className={` shadow-2xl shadow-gray-950 bg-blue-500 z-50 w-1/2 absolute top-16 right-4 rounded overflow-hidden ${
           !isVisible && `hidden`
         }`}
       >
