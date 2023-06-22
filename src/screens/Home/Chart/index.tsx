@@ -89,9 +89,11 @@ export function Chart({ solarInfo }: chartProps) {
   return (
     <View className="bg-white rounded flex-1 justify-center items-center mt-2">
       <View className="flex-row gap-2 mt-2 items-center justify-center">
-        <Text className="font-bold text-lg text-blue-500 ">Energia Gerada</Text>
+        <Text className="font-bold text-lg text-green-600 ">
+          Energia Gerada
+        </Text>
         <Text className="font-bold text-sm text-gray-700/50">x</Text>
-        <Text className="font-bold text-lg text-yellow-400 ">Expectativa</Text>
+        <Text className="font-bold text-lg text-red-600 ">Expectativa</Text>
         <Text className="font-bold text-sm text-gray-700/50">(KWh)</Text>
       </View>
 
@@ -125,7 +127,7 @@ export function Chart({ solarInfo }: chartProps) {
         <VictoryLine
           interpolation="catmullRom"
           style={{
-            data: { stroke: '#4FACFE', strokeWidth: 3 },
+            data: { stroke: colors.green[600], strokeWidth: 3 },
           }}
           data={dataGenerate}
         />
@@ -133,7 +135,7 @@ export function Chart({ solarInfo }: chartProps) {
         <VictoryLine
           interpolation="catmullRom"
           style={{
-            data: { stroke: colors.yellow[400], strokeWidth: 3 },
+            data: { stroke: colors.red[600], strokeWidth: 3 },
           }}
           data={dataExpect}
         />

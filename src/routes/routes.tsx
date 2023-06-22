@@ -7,10 +7,11 @@ import {
 import { RouteProp } from '@react-navigation/native'
 
 import { Home } from '@screens/Home'
-import { AcessLocation } from '@screens/AcessLocation'
+import { AccessLocation } from '@screens/AccessLocation'
 import { SplashScreen } from '@screens/Splash'
 import { LocaleInfoProps } from '@utils/types/locale'
 import { SolarInfoProps } from '@utils/types/solar'
+import { NoAccessNetwork } from '@screens/NoAccessNetwork'
 
 type RootStackParamList = {
   Splash: undefined
@@ -21,7 +22,8 @@ type RootStackParamList = {
     solarInfoMonthly: SolarInfoProps
     solarInfoYearly: SolarInfoProps
   }
-  AcessLocation: undefined
+  AccessLocation: undefined
+  NoAccessNetwork: undefined
 }
 
 export type StackNavigationProps = StackNavigationProp<RootStackParamList>
@@ -37,7 +39,8 @@ export function Routes() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="AcessLocation" component={AcessLocation} />
+      <Stack.Screen name="AccessLocation" component={AccessLocation} />
+      <Stack.Screen name="NoAccessNetwork" component={NoAccessNetwork} />
     </Stack.Navigator>
   )
 }

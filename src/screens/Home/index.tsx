@@ -60,33 +60,35 @@ export function Home() {
   }, [solarInfoHourly])
 
   return (
-    <ScrollView className="bg-white">
-      <View>
-        <Header />
-        <Menu />
+    <>
+      <ScrollView className="bg-white">
+        <View>
+          <Header />
+          <Menu />
 
-        <Background
-          localeInfo={localeInfo}
-          latestKwhGeneration={solarInfoHourly.totals.kwh}
-        />
-
-        <View className="p-2 bg-slate-200">
-          <Select
-            className="mb-2"
-            onAction={(item) => handleGetSolarInfo(item.value)}
+          <Background
+            localeInfo={localeInfo}
+            latestKwhGeneration={solarInfoHourly.totals.kwh}
           />
 
-          <Resume solarInfo={solarAttInfo} />
+          <View className="p-2 bg-slate-200">
+            <Select
+              className="mb-2"
+              onAction={(item) => handleGetSolarInfo(item.value)}
+            />
 
-          <Total
-            kwhToday={solarInfoDaily.totals.kwh}
-            kwhMonth={solarInfoMonthly.totals.kwh}
-            kwhYear={solarInfoYearly.totals.kwh}
-          />
+            <Resume solarInfo={solarAttInfo} />
 
-          <Chart solarInfo={solarAttInfo} />
+            <Total
+              kwhToday={solarInfoDaily.totals.kwh}
+              kwhMonth={solarInfoMonthly.totals.kwh}
+              kwhYear={solarInfoYearly.totals.kwh}
+            />
+
+            <Chart solarInfo={solarAttInfo} />
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   )
 }

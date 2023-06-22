@@ -35,7 +35,7 @@ export function Resume({ solarInfo }: ResumeProps) {
           <Image
             source={solarIcon}
             alt="solar icon"
-            className="w-14 h-14 mt-2"
+            className="w-14 h-14 mt-1"
           />
         </View>
         <View className="bg-white rounded flex-1 h-28 mt-2 items-center py-2 justify-center">
@@ -44,7 +44,7 @@ export function Resume({ solarInfo }: ResumeProps) {
             alt="battery icon"
             className="w-14 h-14"
           />
-          <Text className="font-bold text-gray-600">
+          <Text className="font-bold text-gray-600 mt-1">
             {solarInfo?.totals.percentage}%
           </Text>
         </View>

@@ -4,6 +4,7 @@ import { BackHandler, Dimensions, View } from 'react-native'
 import { useCallback, useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProps } from '@routes/routes'
+import NetInfo from '@react-native-community/netinfo'
 
 import Geolocation from '@react-native-community/geolocation'
 import weatherAPI from '@services/weather-api'
@@ -100,13 +101,23 @@ export function SplashScreen() {
     if (value !== null) {
       GetCurrentWeather()
     } else {
-      navigation.navigate('AcessLocation')
+      navigation.navigate('AccessLocation')
     }
   }, [GetCurrentWeather, navigation])
 
+  const CheckNetwork = useCallback(() => {
+    NetInfo.fetch().then((state) => {
+      if (!state.isConnected) {
+        return navigation.navigate('NoAccessNetwork')
+      }
+
+      CheckLocation()
+    })
+  }, [CheckLocation, navigation])
+
   useEffect(() => {
-    CheckLocation()
-  }, [CheckLocation])
+    CheckNetwork()
+  }, [CheckNetwork, navigation])
 
   return (
     <>
