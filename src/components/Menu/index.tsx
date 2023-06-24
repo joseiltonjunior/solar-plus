@@ -21,10 +21,10 @@ export function Menu() {
     <>
       <Modal
         title="Mas já 😢"
-        description="Você tem certeza que quer sair?"
+        description="Você realmente deseja sair?"
         show={modalLeaving}
         twoActions={{
-          textCancel: 'Sair',
+          textCancel: 'Confimar',
           textConfirm: 'Cancelar',
           actionCancel() {
             setModalLeaving(false)
@@ -36,7 +36,7 @@ export function Menu() {
         }}
       />
       <View
-        className={` shadow-2xl shadow-gray-950 bg-blue-500 z-50 w-1/2 absolute top-16 right-4 rounded overflow-hidden ${
+        className={` shadow-2xl shadow-gray-950 bg-blue-400 z-50 w-1/2 absolute top-20  right-4 rounded overflow-hidden ${
           !isVisible && `hidden`
         }`}
       >
@@ -61,7 +61,7 @@ export function Menu() {
             setModalLeaving(true)
           }}
         >
-          <Text className="font-bold text-base text-white">Sair</Text>
+          <Text className="font-bold text-base text-white">Sair do app</Text>
         </TouchableHighlight>
       </View>
     </>

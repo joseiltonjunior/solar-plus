@@ -43,23 +43,23 @@ export function Select({ onAction, ...rest }: SelectProps) {
 
       {isVisible && (
         <FlatList
-          className="rounded-b overflow-hidden bg-blue-500"
+          className="rounded-b overflow-hidden bg-blue-400"
           scrollEnabled={false}
           data={filter}
-          keyExtractor={(item) => item.name}
-          renderItem={(item) => (
+          keyExtractor={(option) => option.name}
+          renderItem={(option) => (
             <TouchableHighlight
               underlayColor={'rgba(0,0,0,0.3)'}
               className={`p-3 ${
-                item.index + 1 !== filter.length && 'border-b border-white/50'
+                option.index + 1 !== filter.length && 'border-b border-white/50'
               } focus:bg-slate-600`}
               onPress={() => {
-                setValue(item.item)
-                onAction(item.item)
+                setValue(option.item)
+                onAction(option.item)
                 setIsVisible(false)
               }}
             >
-              <Text className="font-bold text-white">{item.item.name}</Text>
+              <Text className="font-bold text-white">{option.item.name}</Text>
             </TouchableHighlight>
           )}
         />
